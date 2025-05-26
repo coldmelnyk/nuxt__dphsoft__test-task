@@ -4,34 +4,42 @@ import type { Note } from "~/types/Note";
 export const useNotes = () => {
   const initialNotesArray: Note[] = [
     {
+      id: "asfasf",
       title: "Note 1",
       content: "Test description for the Note 1",
     },
     {
+      id: "gasfads",
       title: "Note 2",
       content: "Test description for the Note 2",
     },
     {
+      id: "sdgsdfa",
       title: "Note 3",
       content: "Test description for the Note 3",
     },
     {
+      id: "asfadfsdf",
       title: "Note 4",
       content: "Test description for the Note 4",
     },
     {
+      id: "sfgsdfasd",
       title: "Note 5",
       content: "Test description for the Note 5",
     },
     {
+      id: "asfdgsfgs",
       title: "Note 6",
       content: "Test description for the Note 6",
     },
     {
+      id: "asfafs",
       title: "Note 7",
       content: "Test description for the Note 7",
     },
     {
+      id: "gsfgggfs",
       title: "Note 8",
       content: "Test description for the Note 8",
     },

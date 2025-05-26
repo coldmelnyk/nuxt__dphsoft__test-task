@@ -1,15 +1,22 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
+  id: string;
   title: string;
   content: string;
 }>();
+
+const handleClick = (event) => {
+  navigateTo({
+    query: {
+      note: `${props.id}`,
+    },
+  });
+};
 </script>
 
 <template>
-  <article
-    class="flex flex-col gap-2 p-4 rounded-3xl border-blue-400 border min-h-30 max-h-50 max-w-100 justify-center items-center"
-  >
-    <h1 class="font-bold text-2xl">{{ title }}</h1>
-    <p>{{ content }}</p>
+  <article @click="handleClick" class="noteArticle">
+    <h1 class="font-bold text-2xl">{{ props.title }}</h1>
+    <p>{{ props.content }}</p>
   </article>
 </template>

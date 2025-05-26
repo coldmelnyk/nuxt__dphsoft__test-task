@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.noteList {
+  @apply grid justify-center items-center grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-2;
+}
+
+.noteArticle {
+  @apply justify-self-center cursor-pointer transition-all duration-300 flex flex-col gap-2 p-4 rounded-3xl border-blue-400 border min-h-30 max-h-50 max-w-100 justify-center items-center;
+}
+
+.noteArticle:hover {
+  @apply scale-101 drop-shadow-blue-800 shadow;
+}

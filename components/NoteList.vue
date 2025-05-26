@@ -1,11 +1,16 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   notes: Note[];
 }>();
 </script>
 
 <template>
-  <section class="grid grid-cols-4 gap-2">
-    <Note v-for="note in notes" :title="note.title" :content="note.content" />
+  <section class="noteList">
+    <Note
+      v-for="note in props.notes"
+      :title="note.title"
+      :content="note.content"
+      :id="note.id"
+    />
   </section>
 </template>
