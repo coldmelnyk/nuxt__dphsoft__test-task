@@ -55,8 +55,7 @@ export const useNotes = () => {
         if (note) {
           return notes.value.find(
             (noteValue) =>
-              noteValue.title.toLowerCase().trim() ===
-              note.title.toLowerCase().trim()
+              noteValue.id.toLowerCase().trim() === note.id.toLowerCase().trim()
           );
         }
 
@@ -71,8 +70,7 @@ export const useNotes = () => {
         if (note) {
           notes.value = notes.value.filter(
             (noteValue) =>
-              noteValue.title.toLowerCase().trim() !==
-              note.title.toLowerCase().trim()
+              noteValue.id.toLowerCase().trim() !== note.id.toLowerCase().trim()
           );
         }
 
@@ -81,8 +79,7 @@ export const useNotes = () => {
         if (note) {
           const index = notes.value.findIndex(
             (noteValue) =>
-              noteValue.title.toLowerCase().trim() ===
-              note.title.toLowerCase().trim()
+              noteValue.id.toLowerCase().trim() === note.id.toLowerCase().trim()
           );
 
           if (index !== -1) {

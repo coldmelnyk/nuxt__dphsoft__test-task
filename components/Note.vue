@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NoteActions } from "~/enums/NoteActions";
+
 const props = defineProps<{
   id: string;
   title: string;
@@ -6,9 +8,11 @@ const props = defineProps<{
 }>();
 
 const route = useRoute();
+const notesHook = useNotes();
 const queryNote = route.query.note ? route.query.note.toString() : "";
 const open = ref(false);
 const editMode = ref(false);
+const editedNote = ref({ ...props });
 
 const handleClick = () => {
   navigateTo({
@@ -27,6 +31,15 @@ const handleEditMode = () => {
   editMode.value = !editMode.value;
 };
 
+const handleSaveSubmit = (event: Event) => {
+  event.preventDefault();
+
+  const newNote = toRaw(editedNote.value);
+  notesHook.setNote(NoteActions.EDIT, newNote);
+
+  open.value = false;
+};
+
 onMounted(() => {
   if (queryNote === props.id) {
     open.value = true;
@@ -43,10 +56,6 @@ watch(open, (value) => {
       editMode.value = false;
     }, 200);
   }
-});
-
-watch(editMode, (value) => {
-  console.log(value);
 });
 </script>
 
@@ -67,11 +76,15 @@ watch(editMode, (value) => {
             <h2 class="flex justify-center items-center">{{ props.title }}</h2>
 
             <div class="flex gap-3">
-              <UButton focus="false" @click="handleEditMode">
+              <UButton class="cursor-pointer" @click="handleEditMode">
                 Edit
               </UButton>
 
-              <UButton @click="handleModalClose" color="error">
+              <UButton
+                class="cursor-pointer"
+                @click="handleModalClose"
+                color="error"
+              >
                 X
               </UButton>
             </div>
@@ -83,23 +96,42 @@ watch(editMode, (value) => {
         </template>
 
         <template v-else>
-          <header class="flex flex-row justify-between py-3">
-            <h2 class="flex justify-center items-center">
-              Title: {{ props.title }}
-            </h2>
+          <form @submit="handleSaveSubmit">
+            <header class="flex flex-row justify-between py-3">
+              <h2 class="flex justify-center items-center gap-2">
+                Title:
+                <UInput
+                  v-model="editedNote.title"
+                  name="newTitle"
+                  placeholder="Enter new title"
+                />
+              </h2>
 
-            <div class="flex gap-3">
-              <UButton focus="false" color="error" @click="handleEditMode">
-                Cancel
-              </UButton>
+              <div class="flex gap-3">
+                <UButton
+                  class="cursor-pointer"
+                  color="error"
+                  @click="handleEditMode"
+                >
+                  Cancel
+                </UButton>
 
-              <UButton color="warning">
-                Save
-              </UButton>
-            </div>
-          </header>
+                <UButton type="submit" class="cursor-pointer" color="warning">
+                  Save
+                </UButton>
+              </div>
+            </header>
 
-          <main class="py-3">Content: {{ props.content }}</main>
+            <main class="py-3 flex gap-2 items-center">
+              Content:
+              <UTextarea
+                v-model="editedNote.content"
+                name="newContent"
+                class="w-[100%]"
+                autoresize
+              />
+            </main>
+          </form>
         </template>
       </template>
     </UModal>
