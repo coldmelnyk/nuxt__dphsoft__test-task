@@ -34,10 +34,14 @@ onMounted(() => {
 });
 
 watch(open, (value) => {
-  if (value === false) {
+  if (!value) {
     navigateTo({
       query: {},
     });
+
+    setTimeout(() => {
+      editMode.value = false;
+    }, 200);
   }
 });
 
@@ -53,27 +57,50 @@ watch(editMode, (value) => {
 
     <UModal
       v-model:open="open"
-      class="p-4"
+      class="p-4 gap-3"
       :title="props.title"
       :description="props.id"
     >
       <template #content>
-        <header class="flex flex-row justify-between">
-          <h2>{{ props.title }}</h2>
+        <template v-if="!editMode">
+          <header class="flex flex-row justify-between py-3">
+            <h2 class="flex justify-center items-center">{{ props.title }}</h2>
 
-          <div class="flex gap-3">
-            <template v-if="!editMode">
-              <UButton @click="handleEditMode">Edit</UButton>
-              <UButton @click="handleModalClose" color="error">X</UButton>
-            </template>
+            <div class="flex gap-3">
+              <UButton focus="false" @click="handleEditMode">
+                Edit
+              </UButton>
 
-            <template v-else>
-              <UButton color="error" @click="handleEditMode">Cancel</UButton>
-              <UButton color="warning">Save</UButton>
-            </template>
-          </div>
-        </header>
-        {{ props.content }}
+              <UButton @click="handleModalClose" color="error">
+                X
+              </UButton>
+            </div>
+          </header>
+
+          <main class="py-3">
+            {{ props.content }}
+          </main>
+        </template>
+
+        <template v-else>
+          <header class="flex flex-row justify-between py-3">
+            <h2 class="flex justify-center items-center">
+              Title: {{ props.title }}
+            </h2>
+
+            <div class="flex gap-3">
+              <UButton focus="false" color="error" @click="handleEditMode">
+                Cancel
+              </UButton>
+
+              <UButton color="warning">
+                Save
+              </UButton>
+            </div>
+          </header>
+
+          <main class="py-3">Content: {{ props.content }}</main>
+        </template>
       </template>
     </UModal>
   </article>
