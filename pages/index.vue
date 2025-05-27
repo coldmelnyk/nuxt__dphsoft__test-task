@@ -1,16 +1,5 @@
 <script setup lang="ts">
 const notesHook = useNotes();
-const route = useRoute();
-
-const handleModal = (event: MouseEvent) => {
-  const target = event.target as HTMLElement;
-
-  if (target.id !== "modal") {
-    navigateTo({
-      query: {},
-    });
-  }
-};
 </script>
 
 <template>
