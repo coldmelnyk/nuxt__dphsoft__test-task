@@ -8,6 +8,7 @@ const props = defineProps<{
 const route = useRoute();
 const queryNote = route.query.note ? route.query.note.toString() : "";
 const open = ref(false);
+const editMode = ref(false);
 
 const handleClick = () => {
   navigateTo({
@@ -16,6 +17,14 @@ const handleClick = () => {
     },
   });
   open.value = true;
+};
+
+const handleModalClose = () => {
+  open.value = false;
+};
+
+const handleEditMode = () => {
+  editMode.value = !editMode.value;
 };
 
 onMounted(() => {
@@ -31,6 +40,10 @@ watch(open, (value) => {
     });
   }
 });
+
+watch(editMode, (value) => {
+  console.log(value);
+});
 </script>
 
 <template>
@@ -38,8 +51,28 @@ watch(open, (value) => {
     <h1 class="font-bold text-2xl">{{ props.title }}</h1>
     <p>{{ props.content }}</p>
 
-    <UModal v-model:open="open" :title="props.title">
-      <template #description>
+    <UModal
+      v-model:open="open"
+      class="p-4"
+      :title="props.title"
+      :description="props.id"
+    >
+      <template #content>
+        <header class="flex flex-row justify-between">
+          <h2>{{ props.title }}</h2>
+
+          <div class="flex gap-3">
+            <template v-if="!editMode">
+              <UButton @click="handleEditMode">Edit</UButton>
+              <UButton @click="handleModalClose" color="error">X</UButton>
+            </template>
+
+            <template v-else>
+              <UButton color="error" @click="handleEditMode">Cancel</UButton>
+              <UButton color="warning">Save</UButton>
+            </template>
+          </div>
+        </header>
         {{ props.content }}
       </template>
     </UModal>
