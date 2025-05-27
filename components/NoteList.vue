@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Note } from '~/types/Note';
+
 const props = defineProps<{
   notes: Note[];
 }>();

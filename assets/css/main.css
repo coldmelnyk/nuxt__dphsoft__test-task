@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@nuxt/ui";
 
 .noteList {
   @apply grid justify-center items-center grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-2;
