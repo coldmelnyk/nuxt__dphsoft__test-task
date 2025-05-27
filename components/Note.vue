@@ -31,6 +31,14 @@ const handleEditMode = () => {
   editMode.value = !editMode.value;
 };
 
+const handleDeleteNote = () => {
+  open.value = false;
+
+  setTimeout(() => {
+    notesHook.setNote(NoteActions.DELETE, props);
+  }, 270);
+};
+
 const handleSaveSubmit = (event: Event) => {
   event.preventDefault();
 
@@ -76,16 +84,16 @@ watch(open, (value) => {
             <h2 class="flex justify-center items-center">{{ props.title }}</h2>
 
             <div class="flex gap-3">
-              <UButton class="cursor-pointer" @click="handleEditMode">
-                Edit
-              </UButton>
-
               <UButton
                 class="cursor-pointer"
                 @click="handleModalClose"
-                color="error"
+                color="warning"
               >
-                X
+                Cancel
+              </UButton>
+
+              <UButton class="cursor-pointer" @click="handleEditMode">
+                Edit
               </UButton>
             </div>
           </header>
@@ -110,13 +118,21 @@ watch(open, (value) => {
               <div class="flex gap-3">
                 <UButton
                   class="cursor-pointer"
-                  color="error"
+                  color="warning"
                   @click="handleEditMode"
                 >
                   Cancel
                 </UButton>
 
-                <UButton type="submit" class="cursor-pointer" color="warning">
+                <UButton
+                  class="cursor-pointer"
+                  color="error"
+                  @click="handleDeleteNote"
+                >
+                  Delete
+                </UButton>
+
+                <UButton type="submit" class="cursor-pointer" color="success">
                   Save
                 </UButton>
               </div>
