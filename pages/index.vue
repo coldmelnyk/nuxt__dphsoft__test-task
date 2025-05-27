@@ -17,12 +17,6 @@ const handleModal = (event) => {
 
     <NoteList :notes="notesHook.notes.value" />
 
-    <div
-      class="block p-5 border rounded-3xl border-amber-700 text-center"
-      id="modal"
-      v-if="route.query.note"
-    >
-      {{ route.query.note }}
-    </div>
+    <BackdropModal :queryNote="route.query.note" />
   </div>
 </template>
