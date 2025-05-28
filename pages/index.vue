@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+  title: 'My Notes',
+});
+
 const notesHook = useNotes();
 const open = reactive({
   value: false,
