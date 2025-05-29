@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { nanoid } from 'nanoid'
+
 import type { Note } from "~/types/Note";
 import { NoteActions } from "~/enums/NoteActions";
 
@@ -9,7 +11,7 @@ const props = defineProps<{
 const notesHook = useNotes();
 
 const newNote: Note = reactive({
-  id: "adsfadfasfsafsa",
+  id: "",
   title: "",
   content: "",
 });
@@ -19,9 +21,10 @@ const handleAddSubmit = (event: Event) => {
 
   const parsedNewNote = toRaw(newNote);
   const isNewNoteExist = parsedNewNote.title && parsedNewNote.content;
+  const randomId = nanoid();
 
   if (isNewNoteExist) {
-    notesHook.setNote(NoteActions.ADD, { ...parsedNewNote });
+    notesHook.setNote(NoteActions.ADD, { ...parsedNewNote, id: randomId });
     props.openProps.value = false;
   }
 };
