@@ -1,75 +1,40 @@
-# Nuxt Minimal Starter
+# 🚀 DPHsoft Test Task #1
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## 🛠 Tech Stack
 
-## Setup
+- **Nuxt**
+- **TypeScript**
+- **TailwindCSS V4**
+- **Nuxt UI**
+- **Nano ID**
 
-Make sure to install dependencies:
+## ⚡ Getting Started
 
-```bash
-# npm
-npm install
+Follow these steps to run the project locally:
 
-# pnpm
-pnpm install
+1. **Clone the repository**
 
-# yarn
-yarn install
+   ```sh
+   git clone https://github.com/coldmelnyk/nuxt__dphsoft__test-task
+   ```
 
-# bun
-bun install
-```
+   Or download the ZIP archive.
 
-## Development Server
+2. **Navigate to the project folder**
 
-Start the development server on `http://localhost:3000`:
+   ```sh
+   cd nuxt__dphsoft__test-task
+   ```
 
-```bash
-# npm
-npm run dev
+3. **Install dependencies for client**
 
-# pnpm
-pnpm dev
+   ```sh
+   npm install
+   ```
 
-# yarn
-yarn dev
+4. **Start the development server**
+   ```sh
+   npm run dev
+   ```
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Now you can open the project by this path `http://localhost:3000/` 🚀
